@@ -1,0 +1,28 @@
+<html>
+<head>
+    <title>User Registration</title>
+</head>
+<body>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {% for fm in form %}
+        {{ fm.label_tag}} {{ fm }} {{ fm.errors|striptags }}<br><br>
+    {% endfor %}
+
+<input type="submit">
+</form>
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
+{% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+        <p class="er">{{ error }}</p>
+    {% endfor %}
+{% endif %}
+
+<a href="{% url 'login' %}">Login</a>
+
+</body>
+</html>

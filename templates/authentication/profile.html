@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<h1>Welcome {{ name }} </h1>
+
+{% if users != None %}
+    <h3>List of all Users:</h3>
+    {% for user in users %}
+        <a href="{% url 'user_detail' user.id %}" >{{ user.username }}</a><br><br>
+    {% endfor %}
+{% endif %}
+
+{% if  messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="er">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+
+    {% for fm in form %}
+        {{ fm.label_tag}} {{ fm }} {{ fm.errors|striptags }}<br><br>
+    {% endfor %}
+
+{% if perms.authentication_app.view_bookdata %}
+    <input type="button" value="view">
+
+{% else %}
+    <h2>No permission Granted</h2>
+{% endif %}
+
+
+<input type="submit" value="save">
+
+</form>
+<a href="{% url 'changepassword' %}">Change Password</a>
+<a href="{% url 'changepassword1' %}">Change Password1</a>
+<a href="{% url 'loguot' %}">Logout</a>
+
+</body>
+</html>

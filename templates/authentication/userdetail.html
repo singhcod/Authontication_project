@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>USer detial page:</h1>
+<form method="post" action="" novalidate>
+     {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}
+            <p class="er">{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+
+    {{ form.as_p }}
+
+</form>
+<a href="{% url 'profile' %}">Profile</a>
+<a href="{% url 'loguot' %}">Logout</a>
+</body>
+</html>
